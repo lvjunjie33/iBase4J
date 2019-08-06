@@ -1,0 +1,29 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${entity}Service;
+import ${superServiceImplClassPackage};
+import org.springframework.cache.annotation.CacheConfig;
+#if(${cfg.rpcService})
+import com.alibaba.dubbo.config.annotation.Service;
+#else
+import org.springframework.stereotype.Service;
+#end
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${cfg.rpcService})
+@Service(interfaceClass = ${entity}Service.class)
+#else
+@Service
+#end
+@CacheConfig(cacheNames = "${entity}")
+public class ${entity}ServiceImpl extends ${superServiceImplClass}<${entity}, ${table.mapperName}> implements ${entity}Service {
+
+}

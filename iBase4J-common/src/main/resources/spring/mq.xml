@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	    http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<bean id="activeMQConfig" class="top.ibase4j.core.config.ActiveMQConfig" />
+	<bean id="jmsConnectionFactory" factory-bean="activeMQConfig"
+		factory-method="jmsConnectionFactory">
+		<description>JMS连接工厂</description>
+	</bean>
+	<bean id="jmsQueueTemplate" factory-bean="activeMQConfig"
+		factory-method="jmsQueueTemplate">
+		<description>队列模式模型</description>
+	</bean>
+	<bean id="jmsTopicTemplate" factory-bean="activeMQConfig"
+		factory-method="jmsTopicTemplate">
+		<description>发布/订阅模式模型</description>
+	</bean>
+</beans>

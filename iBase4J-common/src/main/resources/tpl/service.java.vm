@@ -1,0 +1,20 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${superServiceImplClassPackage};
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * ${table.comment}  服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+@CacheConfig(cacheNames = "${entity}")
+public class ${entity}Service extends ${superServiceImplClass}<${entity}> {
+	
+}

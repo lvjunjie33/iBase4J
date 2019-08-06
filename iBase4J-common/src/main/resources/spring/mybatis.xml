@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	    http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<bean id="myBatisConfig" class="top.ibase4j.core.config.MyBatisConfig" />
+	<bean id="sqlSessionFactory" factory-bean="myBatisConfig"
+		factory-method="sqlSessionFactory" lazy-init="true">
+		<description>spring和MyBatis完美整合，不需要mybatis的配置映射文件</description>
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean factory-bean="myBatisConfig" factory-method="configurer" lazy-init="true">
+		<description>DAO接口所在包名，Spring会自动查找其下的类</description>
+	</bean>
+	<!-- 事务 -->
+	<bean id="transactionManager" factory-bean="myBatisConfig"
+		factory-method="transactionManager" lazy-init="true">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+</beans>

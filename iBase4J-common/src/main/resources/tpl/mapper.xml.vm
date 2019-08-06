@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${table.mapperName}">
+	<select id="selectIdPage" resultType="java.lang.Long" useCache="false">
+		select id_ from ${table.name}
+		<where>
+#foreach($field in ${table.fields})
+			<if test="cm.${field.propertyName} != null and cm.${field.propertyName} != ''">
+					and ${field.name}=#{cm.${field.propertyName}}
+			</if>
+#end
+			<if test="cm.keyword != null and cm.keyword != ''">
+				and (
+#foreach($field in ${table.fields})
+	#if( $!{foreach.index} > 0)
+				  or
+	#end
+				  ${field.name} like CONCAT(#{cm.keyword},'%')
+#end
+				)
+			</if>
+		</where>
+		<if test="cm.orderBy != null and cm.orderBy != ''">
+			order by ${cm.orderBy}
+		</if>
+	</select>
+	<!-- -->
+	<select id="selectPage" resultType="${package.Entity}.${entity}" useCache="false">
+		select 
+#foreach($field in ${table.fields})
+	#if( $!{foreach.index} > 0)
+				  ,
+	#end
+				  ${field.name}
+#end
+		from ${table.name}
+		<where>
+#foreach($field in ${table.fields})
+			<if test="cm.${field.propertyName} != null and cm.${field.propertyName} != ''">
+					and ${field.name}=#{cm.${field.propertyName}}
+			</if>
+#end
+			<if test="cm.keyword != null and cm.keyword != ''">
+				and (
+#foreach($field in ${table.fields})
+	#if( $!{foreach.index} > 0)
+				  or
+	#end
+				  ${field.name} like CONCAT(#{cm.keyword},'%')
+#end
+				)
+			</if>
+		</where>
+		<if test="cm.orderBy != null and cm.orderBy != ''">
+			order by ${cm.orderBy}
+		</if>
+	</select>
+</mapper>

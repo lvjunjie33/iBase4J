@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<!-- -->
+	<bean id="redisConfig" class="top.ibase4j.core.config.RedisConfig" />
+	<!-- jedis 配置 -->
+	<bean id="redisPoolConfig" factory-bean="redisConfig"
+		factory-method="redisPoolConfig" />
+	<bean id="clientResources" factory-bean="redisConfig"
+		factory-method="clientResources" />
+	<!-- redis服务器中心 -->
+	<bean id="redisConnectionFactory" factory-bean="redisConfig"
+		factory-method="redisConnectionFactory"
+		c:redis-pool-config-ref="redisPoolConfig"
+		c:client-resources-ref="clientResources" />
+	<bean id="redisTemplate" factory-bean="redisConfig"
+		factory-method="redisTemplate"
+		c:redis-connection-factory-ref="redisConnectionFactory" />
+	<!-- 缓存管理 -->
+	<bean id="redisCacheManager" factory-bean="redisConfig"
+		factory-method="redisCacheManager"
+		c:redis-connection-factory-ref="redisConnectionFactory" />
+	<!-- -->
+	<bean factory-bean="redisConfig" factory-method="redisHelper"
+		c:redis-template-ref="redisTemplate" />
+</beans>
