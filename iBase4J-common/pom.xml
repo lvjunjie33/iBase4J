@@ -60,7 +60,7 @@
 		<xfire.version>1.2.6</xfire.version>
 		<jsch.version>0.1.54</jsch.version>
 		<zxing.version>3.3.2</zxing.version>
-		<jackson.version>2.9.5</jackson.version>
+		<jackson.version>2.12.1</jackson.version>
 		<zookeeper.version>3.4.12</zookeeper.version>
 		<shiro.version>1.4.0</shiro.version>
 		<quartz.version>2.3.0</quartz.version>
