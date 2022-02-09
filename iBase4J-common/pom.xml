@@ -62,7 +62,7 @@
 		<zxing.version>3.3.2</zxing.version>
 		<jackson.version>2.9.5</jackson.version>
 		<zookeeper.version>3.4.12</zookeeper.version>
-		<shiro.version>1.4.0</shiro.version>
+		<shiro.version>1.7.1</shiro.version>
 		<quartz.version>2.3.0</quartz.version>
 		<aspectj.version>1.9.1</aspectj.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
