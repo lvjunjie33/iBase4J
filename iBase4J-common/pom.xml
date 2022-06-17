@@ -47,7 +47,7 @@
 		<!-- -->
 		<druid.version>1.1.12</druid.version>
 		<dubbo.version>2.7.1</dubbo.version>
-		<fastjson.version>1.2.55</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<motan.version>1.1.1</motan.version>
 		<!-- -->
 		<netty-version>4.1.25.Final</netty-version>
